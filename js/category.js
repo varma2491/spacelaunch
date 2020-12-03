@@ -34,17 +34,20 @@ $(document).ready(function () {
 });
 
 function getData(launchYearFilter, launchFilter, landingFilter) {
+  var spaceUrl = document.location.href;
   var url = "https://api.spaceXdata.com/v3/launches?limit=100";
   if (launchYearFilter) {
     url += "&launch_year=" + launchYearFilter;
+    window.history.pushState(null, null, "&launch_year=" + launchYearFilter);
   }
   if (launchFilter) {
     url += "&launch_success=" + launchFilter;
+    window.history.pushState(null, null, "&launch_success=" + launchFilter);
   }
   if (landingFilter) {
     url += "&land_success=" + landingFilter;
+    window.history.pushState(null, null, "&land_success=" + landingFilter);
   }
-  //("&launch_success=true&land_success=true&launch_year=2014");
   fetch(url)
     .then((res) => res.json())
     .then((out) => {
